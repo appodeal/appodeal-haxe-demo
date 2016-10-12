@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="AppodealDemo" package="com.appodeal.test" version="1.0.0" company="Company Name" />
+	<app main="Main" path="Export" file="AppodealDemo" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="extension-admob" />
+	
+	<assets path="Assets" rename="assets" />
+	
+	<include path="./appodeal-plugin" />
+	
+	<window background="#EF3326" fps="60" />
+	
+</project>

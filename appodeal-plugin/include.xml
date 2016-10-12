@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<section if="android">
+		<dependency name="appodeal" path="dependencies/appodeal" if="android" />
+		<dependency name="cheetah" path="dependencies/cheetah-mobile" if="android" />
+		<android extension="com.appodeal.stencyl.AppodealExtension" />
+		<java path ="dependencies/android/libs/applovin-6.3.0.jar"/>
+		<java path ="dependencies/android/libs/appodeal-1.15.5.jar"/>
+		<java path ="dependencies/android/libs/chartboost-6.5.1.jar"/>
+		<java path ="dependencies/android/libs/my-target-4.5.10.jar"/>
+		<java path ="dependencies/android/libs/unity-ads-2.0.4.jar"/>
+		<java path ="dependencies/android/libs/yandex-metrica-android-2.41.jar"/>
+	</section>
+    <section if="ios">
+        <ndll name="appodeal" />
+
+        <dependency path="frameworks/Appodeal.framework" />
+        <assets path="frameworks/Appodeal.bundle" rename="../../Appodeal.bundle" />
+        <assets path="frameworks/Appodeal.framework" rename="../../Appodeal.framework" />
+        <assets path="frameworks/appodeal-ios-sdk-mobile-adapters/" rename="../../appodeal-ios-sdk-mobile-adapters" />
+
+        <ios linker-flags="-ObjC" />
+	    <ios linker-flags="-fobjc-arc" unless="fobjc-arc-included" />
+
+        <dependency name="z"/>
+        <dependency name="c++"/>
+        <dependency name="xml2.2"/>
+        <dependency name="sqlite3"/>
+
+        <dependency name="CoreTelephony.framework" />
+        <dependency name="AdSupport.framework" />
+        <dependency name="AudioToolbox.framework" />
+        <dependency name="AVFoundation.framework" />
+        <dependency name="CoreGraphics.framework" />
+        <dependency name="CFNetwork.framework" />
+        <dependency name="CoreMedia.framework" />
+        <dependency name="EventKit.framework" />
+        <dependency name="EventKitUI.framework" />
+        <dependency name="MessageUI.framework" />
+        <dependency name="StoreKit.framework" />
+        <dependency name="SystemConfiguration.framework" />
+        <dependency name="CoreFoundation.framework" />
+        <dependency name="CoreImage.framework" />
+        <dependency name="CoreLocation.framework" />
+        <dependency name="CoreMotion.framework" />
+        <dependency name="MediaPlayer.framework" />
+        <dependency name="MobileCoreServices.framework" />
+        <dependency name="QuartzCore.framework" />
+        <dependency name="Security.framework" />
+        <dependency name="Social.framework" />
+        <dependency name="Twitter.framework" />
+        <dependency name="UIKit.framework" />
+        <dependency name="WebKit.framework" />
+        <dependency name="JavaScriptCore.framework" />
+        <dependency name="CoreBluetooth.framework" />
+        <dependency name="GLKit.framework" />
+        <dependency name="SafariServices.framework" />
+
+        <template path="templates" />
+	</section>
+</project>

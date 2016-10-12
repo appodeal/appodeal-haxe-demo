@@ -1,0 +1,6 @@
+name=Appodeal
+description=Appodeal Extension for Stencyl
+author=Appodeal, Inc
+website=http://www.appodeal.com
+version=1.0.0
+compatibility=mobile

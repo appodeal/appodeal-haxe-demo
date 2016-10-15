@@ -195,6 +195,7 @@ class Main extends Sprite {
 		//Appodeal.setCustomBooleanRule("special_user", true); //way to specify your own rule value to define segments
 		//Appodeal.trackInAppPurchase("USD", 5); //you can also track in-app purchases
 		
+		Appodeal.setLogLevel(Appodeal.LOG_LEVEL_VERBOSE);
 		Appodeal.initialize("fee50c333ff3825fd6ad6d38cff78154de3025546d47a84f", true, true, true, false, true);
 	}
 	

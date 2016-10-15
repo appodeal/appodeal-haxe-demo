@@ -24,7 +24,7 @@
     <class path="Source" />
     <class path="D:\programs\Haxe toolkit\haxe\lib\openfl\4,3,0\externs\core\openfl" />
     <class path="D:\programs\Haxe toolkit\haxe\lib\openfl\4,3,0\externs\extras" />
-    <class path="appodeal-stencyl-plugin" />
+    <class path="appodeal-plugin" />
     <class path="Export\android\debug\haxe" />
   </classpaths>
   <!-- Build options -->

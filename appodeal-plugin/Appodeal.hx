@@ -33,6 +33,10 @@ class Appodeal  {
 	public static inline var SMOKING_NEGATIVE:Int	= 0;
 	public static inline var SMOKING_NEUTRAL:Int	= 1;
 	public static inline var SMOKING_POSITIVE:Int	= 2;
+	
+	public static inline var LOG_LEVEL_DEBUG:Int	= 0;
+	public static inline var LOG_LEVEL_VERBOSE:Int	= 1;
+	public static inline var LOG_LEVEL_NONE:Int	= 2;
 
     #if android
 		public static inline var INTERSTITIAL:Int    	   = 1;
@@ -116,7 +120,7 @@ class Appodeal  {
         private static var _disableWriteExternalStoragePermissionCheck:Dynamic;
 
         private static var _setTesting:Dynamic;
-        private static var _setLogging:Dynamic;
+        private static var _setLogLevel:Dynamic;
         private static var _isLoaded:Dynamic;
         private static var _trackInAppPurchase:Dynamic;
         private static var _setSmartBanners:Dynamic;
@@ -543,14 +547,15 @@ class Appodeal  {
         #end
 	}
 	
-	public static function setLogging(log:Bool):Void {		
+	public static function setLogLevel(level:Int):Void {		
     	#if android
-			if(_setLogging == null) {
-				_setLogging = JNI.createStaticMethod(appodealJava, "setLogging", "(Z)V");
+			if(_setLogLevel == null) {
+				_setLogLevel = JNI.createStaticMethod(appodealJava, "setLogLevel", "(I)V");
 			}
-			_setLogging(log);
+			_setLogLevel(level);
 		#end
         #if ios
+			var log:Bool = level != LOG_LEVEL_NONE;
             _setLoggingiOS(log);
         #end
 	}

@@ -49,8 +49,21 @@ public class AppodealExtension extends Extension {
 		Appodeal.setTesting(test);
 	}
 	
-	public static void setLogging (boolean log) {
-		Appodeal.setLogging(log);
+	public static void setLogLevel (int level) {
+		com.appodeal.ads.utils.Log.LogLevel appodealLevel;
+		switch(level){
+			case 0:
+				appodealLevel = com.appodeal.ads.utils.Log.LogLevel.debug;
+				break;
+			case 1:
+				appodealLevel = com.appodeal.ads.utils.Log.LogLevel.verbose;
+				break;
+			case 2:
+			default:
+				appodealLevel = com.appodeal.ads.utils.Log.LogLevel.none;
+				break;
+		}
+		Appodeal.setLogLevel(appodealLevel);
 	}
 
 	public static boolean isLoaded(int adType) {

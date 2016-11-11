@@ -8,6 +8,7 @@ import openfl.display.SimpleButton;
 import openfl.events.MouseEvent;
 
 class Main extends Sprite {
+	var interstitialState:Int = 0; //0 - not loaded; 1 - loading; 2 - loaded
 	
 	public function new () {
 		
@@ -78,10 +79,12 @@ class Main extends Sprite {
 	}
 	
 	public function onInterstitialLoaded(){
+		interstitialState = 2;
 		trace("interstitial loaded");
 	}
 	
 	public function onInterstitialFailedToLoad(){
+		interstitialState = 0;
 		trace("interstitial failed to load");
 	}
 	
@@ -196,6 +199,7 @@ class Main extends Sprite {
 		//Appodeal.trackInAppPurchase("USD", 5); //you can also track in-app purchases
 		
 		Appodeal.setLogLevel(Appodeal.LOG_LEVEL_VERBOSE);
+		Appodeal.setAutoCache(Appodeal.INTERSTITIAL, false);
 		Appodeal.initialize("fee50c333ff3825fd6ad6d38cff78154de3025546d47a84f", true, true, true, false, true);
 	}
 	
@@ -204,11 +208,19 @@ class Main extends Sprite {
 	}
 	
 	public function onShowInterstitialClicked(e: MouseEvent):Void{
-		Appodeal.show(Appodeal.INTERSTITIAL);
+		if(interstitialState == 0){
+			interstitialState = 1;
+			Appodeal.cache(Appodeal.INTERSTITIAL);
+		}
+		if (interstitialState == 2){
+			interstitialState = 0;
+			Appodeal.showWithPlacement(Appodeal.INTERSTITIAL, "main_menu");
+		}
 	}
 	
 	public function onShowVideoClicked(e: MouseEvent):Void{
-		Appodeal.show(Appodeal.REWARDED_VIDEO);
+		if(Appodeal.isLoaded(Appodeal.REWARDED_VIDEO))
+			Appodeal.show(Appodeal.REWARDED_VIDEO);
 	}
 	
 	public function onShowVideoOrInterstitialClicked(e: MouseEvent):Void{

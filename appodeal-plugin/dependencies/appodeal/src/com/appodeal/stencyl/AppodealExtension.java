@@ -74,6 +74,10 @@ public class AppodealExtension extends Extension {
 		return Appodeal.isPrecache(adType);
 	}
 	
+	public static void cache(int adType){
+		Appodeal.cache(mainActivity, adType);
+	}
+	
 
 	//CALLBACKS REGION
 

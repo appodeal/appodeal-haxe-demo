@@ -3,7 +3,6 @@ package com.appodeal.stencyl;
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
 import com.appodeal.ads.InterstitialCallbacks;
-import com.appodeal.ads.SkippableVideoCallbacks;
 import com.appodeal.ads.NonSkippableVideoCallbacks;
 import com.appodeal.ads.RewardedVideoCallbacks;
 import com.appodeal.ads.UserSettings;
@@ -16,7 +15,6 @@ public class AppodealExtension extends Extension {
 	private static UserSettings userSettings;
 	private static HaxeObject bannerListener;
 	private static HaxeObject interstitialListener;
-	private static HaxeObject skippableListener;
 	private static HaxeObject nonSkippableListener;
 	private static HaxeObject rewardedListener;
 
@@ -114,6 +112,12 @@ public class AppodealExtension extends Extension {
 			{
 			   	AppodealExtension.callHaxeInterstitial("onInterstitialClosed", new Object[] {});
 			}
+			
+			@Override
+			public void onInterstitialFinished()
+			{
+				AppodealExtension.callHaxeInterstitial("onInterstitialFinished", new Object[] {});
+			}
 
 		});
 	}
@@ -141,38 +145,6 @@ public class AppodealExtension extends Extension {
 			public void onBannerClicked() {
 				AppodealExtension.callHaxeBanner("onBannerClicked", new Object[] {}); 
 			}
-			
-		 });
-	}
-	
-	public static void setSkippableVideoCallbacks (HaxeObject haxeCallback) {
-		skippableListener = haxeCallback;
-		Appodeal.setSkippableVideoCallbacks(new SkippableVideoCallbacks() {
-			
-			@Override
-			public void onSkippableVideoLoaded() {
-				AppodealExtension.callHaxeSkippableVideo("onSkippableVideoLoaded", new Object[] {});
-			}
-
-			@Override
-			public void onSkippableVideoFailedToLoad() {
-				AppodealExtension.callHaxeSkippableVideo("onSkippableVideoFailedToLoad", new Object[] {});
-			}
-
-			@Override
-			public void onSkippableVideoShown() {
-				AppodealExtension.callHaxeSkippableVideo("onSkippableVideoShown", new Object[] {});
-			}
-
-			@Override
-			public void onSkippableVideoFinished() {
-				AppodealExtension.callHaxeSkippableVideo("onSkippableVideoFinished", new Object[] {});
-			}
-
-			@Override
-			public void onSkippableVideoClosed(boolean finished) {
-				AppodealExtension.callHaxeSkippableVideo("onSkippableVideoClosed", new Object[] {});
-			}	
 			
 		 });
 	}
@@ -277,17 +249,6 @@ public class AppodealExtension extends Extension {
 		});
 	}
 
-	private static void callHaxeSkippableVideo (final String name, final Object[] args) {
-		if(skippableListener == null) {
-			return;
-		}
-		callbackHandler.post(new Runnable() {
-			public void run() {
-				skippableListener.call(name, args);
-			}
-		});
-	}
-
 	private static void callHaxeRewardedVideo (final String name, final Object[] args) {
 		if(rewardedListener == null) {
 			return;
@@ -307,7 +268,7 @@ public class AppodealExtension extends Extension {
 	}
 
 	public static void setOnLoadedTriggerBoth (int adType, boolean setOnLoad) {
-		Appodeal.setOnLoadedTriggerBoth(adType, setOnLoad);
+		Appodeal.setTriggerOnLoadedOnPrecache(adType, setOnLoad);
 	}
 
 	public static void disableNetwork (String network) {

@@ -39,8 +39,7 @@ class Appodeal  {
 	public static inline var LOG_LEVEL_NONE:Int	= 2;
 
     #if android
-		public static inline var INTERSTITIAL:Int    	   = 1;
-		public static inline var SKIPPABLE_VIDEO:Int   	   = 2;
+		public static inline var INTERSTITIAL:Int    	   = 3;
 		public static inline var BANNER:Int          	   = 4;
 		public static inline var BANNER_BOTTOM:Int   	   = 8;
 		public static inline var BANNER_TOP:Int     	   = 16;
@@ -49,8 +48,7 @@ class Appodeal  {
 	#end
 
 	#if ios
-		public static inline var INTERSTITIAL:Int    	   = 1;
-		public static inline var SKIPPABLE_VIDEO:Int   	   = 2;
+		public static inline var INTERSTITIAL:Int    	   = 3;
 		public static inline var BANNER:Int          	   = 4;
         public static inline var BANNER_TOP:Int            = 4;
         public static inline var BANNER_BOTTOM:Int         = 5;
@@ -67,7 +65,6 @@ class Appodeal  {
         private static var _initializeiOS = Lib.load("appodeal", "appodeal_initialize", 2);
         private static var _enableInterstitialCallbacksiOS = Lib.load("appodeal", "appodeal_enableInterstitialCallbacks", 0);
         private static var _enableBannerCallbacksiOS = Lib.load("appodeal", "appodeal_enableBannerCallbacks", 0);
-        private static var _enableSkippableVideoCallbacksiOS = Lib.load("appodeal", "appodeal_enableSkippableVideoCallbacks" , 0);
         private static var _enableRewardedVideoCallbacksiOS = Lib.load("appodeal", "appodeal_enableRewardedVideoCallbacks", 0);
         private static var _enableNonSkippableVideoCallbacksiOS = Lib.load("appodeal", "appodeal_enableNonSkippableVideoCallbacks", 0);
         private static var _showiOS = Lib.load("appodeal", "appodeal_show" , 1);
@@ -146,7 +143,6 @@ class Appodeal  {
 
         private static var _setBannerCallbacks:Dynamic;
         private static var _setInterstitialCallbacks:Dynamic;
-        private static var _setSkippableVideoCallbacks:Dynamic;
         private static var _setNonSkippableVideoCallbacks:Dynamic;
         private static var _setRewardedVideoCallbacks:Dynamic;
     #end
@@ -162,12 +158,7 @@ class Appodeal  {
     public static var onInterstitialClickedCall:Void->Void;
     public static var onInterstitialClosedCall:Void->Void;
     public static var onInterstitialFailedToLoadCall:Void->Void;
-
-    public static var onSkippableVideoLoadedCall:Void->Void;
-    public static var onSkippableVideoFailedToLoadCall:Void->Void;
-    public static var onSkippableVideoShownCall:Void->Void;
-    public static var onSkippableVideoClosedCall:Void->Void;
-    public static var onSkippableVideoFinishedCall:Void->Void;
+	public static var onInterstitialFinishedCall:Void->Void;
 
     public static var onNonSkippableVideoLoadedCall:Void->Void;
     public static var onNonSkippableVideoFailedToLoadCall:Void->Void;
@@ -182,21 +173,17 @@ class Appodeal  {
     public static var onRewardedVideoFinishedCall:Void->Void;
 
     private static var InterstitialCallbacksEnabled:Bool=false;
-    private static var SkippableCallbacksEnabled:Bool=false;
     private static var NonSkippableCallbacksEnabled:Bool=false;
     private static var RewardedCallbacksEnabled:Bool=false;
     private static var BannerCallbacksEnabled:Bool=false;
 
-	public static function initialize(appKey:String, banner:Bool, interstitial:Bool, skippable:Bool, nonSkippable:Bool, rewarded:Bool):Void {
+	public static function initialize(appKey:String, banner:Bool, interstitial:Bool, nonSkippable:Bool, rewarded:Bool):Void {
 		var adType:Int = 0;
 		if(banner) {
 			adType = adType | Appodeal.BANNER;
 		}
 		if(interstitial) {
 			adType = adType | Appodeal.INTERSTITIAL;
-		}
-		if(skippable) {
-			adType = adType | Appodeal.SKIPPABLE_VIDEO;
 		}
 		if(nonSkippable) {
 			adType = adType | Appodeal.NON_SKIPPABLE_VIDEO;
@@ -260,27 +247,11 @@ class Appodeal  {
             {
                 Reflect.callMethod(null, onInterstitialFailedToLoadCall, []);
             }
-
-            if (type == 'onSkippableVideoLoaded' && onSkippableVideoLoadedCall != null)
-            {
-                Reflect.callMethod(null, onSkippableVideoLoadedCall, []);
-            }
-            if (type == 'onSkippableVideoFailedToLoad' && onSkippableVideoFailedToLoadCall != null)
-            {
-                Reflect.callMethod(null, onSkippableVideoFailedToLoadCall, []);
-            }
-            if (type == 'onSkippableVideoShown' && onSkippableVideoShownCall != null)
-            {
-                Reflect.callMethod(null, onSkippableVideoShownCall, []);
-            }
-            if (type == 'onSkippableVideoClosed' && onSkippableVideoClosedCall != null)
-            {
-                Reflect.callMethod(null, onSkippableVideoClosedCall, []);
-            }
-            if (type == 'onSkippableVideoFinished' && onSkippableVideoFinishedCall != null)
-            {
-                Reflect.callMethod(null, onSkippableVideoFinishedCall, []);
-            }
+			
+			if (type == 'onInterstitialFinished' && onInterstitialFinishedCall != null)
+			{
+				Reflect.callMethod(null, onInterstitialClickedCall, []);
+			}
 
             if (type == 'onNonSkippableVideoLoaded' && onNonSkippableVideoLoadedCall != null)
             {
@@ -357,21 +328,6 @@ class Appodeal  {
         #end
     }
 
-    public static function enableSkippableVideoCallbacks():Void {
-        #if android
-            if(_setSkippableVideoCallbacks == null) {
-                _setSkippableVideoCallbacks = JNI.createStaticMethod(appodealJava, "setSkippableVideoCallbacks", "(Lorg/haxe/lime/HaxeObject;)V");
-                _setSkippableVideoCallbacks(new SkippableVideoCallbacks());
-            }
-        #end
-        #if ios
-            if(!SkippableCallbacksEnabled) {
-                _enableSkippableVideoCallbacksiOS();
-                SkippableCallbacksEnabled = true;
-            }
-        #end
-    }
-
     public static function enableRewardedVideoCallbacks():Void {
         #if android
             if(_setRewardedVideoCallbacks == null) {
@@ -413,12 +369,6 @@ class Appodeal  {
 		#if ios
             var showTypeIos:Int    	   = 0;
             if(adType == Appodeal.INTERSTITIAL)
-                showTypeIos = 1;
-
-            if(adType == Appodeal.SKIPPABLE_VIDEO)
-                showTypeIos = 2;
-
-            if(adType == (Appodeal.INTERSTITIAL | Appodeal.SKIPPABLE_VIDEO))
                 showTypeIos = 3;
 
             if(adType == Appodeal.BANNER_TOP)
@@ -448,12 +398,6 @@ class Appodeal  {
 		#if ios
             var showTypeIos1:Int    	   = 0;
             if(adType == Appodeal.INTERSTITIAL)
-                showTypeIos1 = 1;
-
-            if(adType == Appodeal.SKIPPABLE_VIDEO)
-                showTypeIos1 = 2;
-
-            if(adType == (Appodeal.INTERSTITIAL | Appodeal.SKIPPABLE_VIDEO))
                 showTypeIos1 = 3;
 
             if(adType == Appodeal.BANNER_TOP)
@@ -585,12 +529,6 @@ class Appodeal  {
 		#if ios
             var showTypeIos2:Int    	   = 0;
             if(adType == Appodeal.INTERSTITIAL)
-                showTypeIos2 = 1;
-
-            if(adType == Appodeal.SKIPPABLE_VIDEO)
-                showTypeIos2 = 2;
-
-            if(adType == (Appodeal.INTERSTITIAL | Appodeal.SKIPPABLE_VIDEO))
                 showTypeIos2 = 3;
 
             if(adType == Appodeal.BANNER_TOP)
@@ -934,6 +872,9 @@ class Appodeal  {
 
             if (type == 'onInterstitialFailedToLoad')
                 onInterstitialFailedToLoadCall = callbackFn;
+			
+			if (type == 'onInterstitialFinished')
+				onInterstitialFinishedCall = callbackFn;
         #end
     }
 
@@ -953,45 +894,9 @@ class Appodeal  {
 
             if (type == 'onInterstitialFailedToLoad')
                 onInterstitialFailedToLoadCall = null;
-        #end
-    }
-
-    public static function addSkippableListener(type:String, callbackFn:Void->Void):Void {
-        #if (android || ios)
-            enableSkippableVideoCallbacks();
-            if (type == 'onSkippableVideoLoaded')
-                onSkippableVideoLoadedCall = callbackFn;
-
-            if (type == 'onSkippableVideoFailedToLoad')
-                onSkippableVideoFailedToLoadCall = callbackFn;
-
-            if (type == 'onSkippableVideoShown')
-                onSkippableVideoShownCall = callbackFn;
-
-            if (type == 'onSkippableVideoClosed')
-                onSkippableVideoClosedCall = callbackFn;
-
-            if (type == 'onSkippableVideoFinished')
-                onSkippableVideoFinishedCall = callbackFn;
-        #end
-    }
-
-    public static function removeSkippableListener(type:String):Void {
-        #if (android || ios)
-            if (type == 'onSkippableVideoLoaded')
-                onSkippableVideoLoadedCall = null;
-
-            if (type == 'onSkippableVideoFailedToLoad')
-                onSkippableVideoFailedToLoadCall = null;
-
-            if (type == 'onSkippableVideoShown')
-                onSkippableVideoShownCall = null;
-
-            if (type == 'onSkippableVideoClosed')
-                onSkippableVideoClosedCall = null;
-
-            if (type == 'onSkippableVideoFinished')
-                onSkippableVideoFinishedCall = null;
+			
+			if (type == 'onInterstitialFinished')
+				onInterstitialFinishedCall = null;
         #end
     }
 
@@ -1155,51 +1060,14 @@ class InterstitialCallbacks  {
             }
         #end
     }
-}
-
-class SkippableVideoCallbacks {
-
-    public function new()  { }
-
-    public function onSkippableVideoLoaded():Void {
-        #if android
-            if (Appodeal.onSkippableVideoLoadedCall != null) {
-                Appodeal.onSkippableVideoLoadedCall();
-            }
-        #end
-    }
-
-    public function onSkippableVideoFailedToLoad():Void {
-        #if android
-            if (Appodeal.onSkippableVideoFailedToLoadCall != null) {
-                Appodeal.onSkippableVideoFailedToLoadCall();
-            }
-        #end
-    }
-
-    public function onSkippableVideoShown():Void {
-        #if android
-            if (Appodeal.onSkippableVideoShownCall != null) {
-                Appodeal.onSkippableVideoShownCall();
-            }
-        #end
-    }
-
-    public function onSkippableVideoFinished():Void {
-        #if android
-            if (Appodeal.onSkippableVideoFinishedCall != null) {
-                Appodeal.onSkippableVideoFinishedCall();
-            }
-        #end
-    }
-
-    public function onSkippableVideoClosed():Void {
-        #if android
-            if (Appodeal.onSkippableVideoClosedCall != null) {
-                Appodeal.onSkippableVideoClosedCall();
-            }
-        #end
-    }
+	
+	public function onInterstitialFinished():Void {
+		#if android
+			if(Appodeal.onInterstitialFinishedCall != null){
+				Appodeal.onInterstitialFinishedCall();
+			}
+		#end
+	}
 }
 
 class NonSkippableVideoCallbacks {

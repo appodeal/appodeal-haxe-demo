@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('facebook-audience-network-4.17.aar'))

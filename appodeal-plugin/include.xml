@@ -3,13 +3,14 @@
 	<section if="android">
 		<dependency name="appodeal" path="dependencies/appodeal" if="android" />
 		<dependency name="cheetah" path="dependencies/cheetah-mobile" if="android" />
+		<dependency name="facebook" path="dependencies/facebook-audience-network" if="android" />
 		<android extension="com.appodeal.stencyl.AppodealExtension" />
-		<java path ="dependencies/android/libs/applovin-6.3.0.jar"/>
-		<java path ="dependencies/android/libs/appodeal-1.15.5.jar"/>
-		<java path ="dependencies/android/libs/chartboost-6.5.1.jar"/>
-		<java path ="dependencies/android/libs/my-target-4.5.10.jar"/>
-		<java path ="dependencies/android/libs/unity-ads-2.0.4.jar"/>
-		<java path ="dependencies/android/libs/yandex-metrica-android-2.41.jar"/>
+		<java path ="dependencies/android/libs/applovin-6.3.2.jar"/>
+		<java path ="dependencies/android/libs/appodeal-1.16.jar"/>
+		<java path ="dependencies/android/libs/chartboost-6.6.1.jar"/>
+		<java path ="dependencies/android/libs/my-target-4.5.15.jar"/>
+		<java path ="dependencies/android/libs/unity-ads-2.0.5.jar"/>
+		<java path ="dependencies/android/libs/yandex-metrica-android-2.51.jar"/>
 	</section>
     <section if="ios">
         <ndll name="appodeal" />

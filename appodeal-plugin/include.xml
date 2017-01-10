@@ -3,13 +3,18 @@
 	<section if="android">
 		<dependency name="appodeal" path="dependencies/appodeal" if="android" />
 		<dependency name="cheetah" path="dependencies/cheetah-mobile" if="android" />
+		<dependency name="play-services-ads" path="dependencies/google-play-services_lib/play-services-ads-9.8.0" if="android"/>
+		<dependency name="play-services-ads-lite" path="dependencies/google-play-services_lib/play-services-ads-lite-9.8.0" if="android"/>
+		<dependency name="play-services-base" path="dependencies/google-play-services_lib/play-services-base-9.8.0" if="android"/>
+		<dependency name="play-services-basement" path="dependencies/google-play-services_lib/play-services-basement-9.8.0" if="android"/>
 		<android extension="com.appodeal.stencyl.AppodealExtension" />
 		<java path ="dependencies/android/libs/applovin-6.3.0.jar"/>
-		<java path ="dependencies/android/libs/appodeal-1.15.5.jar"/>
+		<java path ="dependencies/android/libs/appodeal-1.15.8.jar"/>
 		<java path ="dependencies/android/libs/chartboost-6.5.1.jar"/>
+		<java path ="dependencies/android/libs/flurry-analytics-6.5.0.jar"/>
 		<java path ="dependencies/android/libs/my-target-4.5.10.jar"/>
 		<java path ="dependencies/android/libs/unity-ads-2.0.4.jar"/>
-		<java path ="dependencies/android/libs/yandex-metrica-android-2.41.jar"/>
+		<java path ="dependencies/android/libs/yandex-metrica-android-2.51.jar"/>
 	</section>
     <section if="ios">
         <ndll name="appodeal" />

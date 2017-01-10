@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<Defaults>
+    <Button>
+        <Default
+            format-size = "30"
+			format-color = "0x000000"
+			padding = "5"
+			skin:Layer-behind:Paint-color = "0xFFFFFF"
+			skin:Layer-behind:Paint-corners = "[20]"
+			skin:Layer-current:Paint-color = "0xFFFFFF"
+			skin:Layer-current:Paint-corners = "[20]"
+			
+			skinPressed:Layer-behind:Paint-color = "0xFFFFFF"
+			skinPressed:Layer-behind:Paint-corners = "[20]"
+			skinPressed:Layer-current:Paint-color = "0xEF3326"
+			skinPressed:Layer-current:Paint-corners = "[20]"
+			skinPressed:Layer-current:Paint-padding = "2"
+        />
+    </Button>
+	<Options>
+        <Default
+            format-size = "30"
+			format-color = "0x000000"
+        />
+    </Options>
+	<Checkbox>
+		<Default
+			format-size = "20"
+			format-color = "0xFFFFFF"
+			states-down-ico-src = "'assets/checked.png'"
+			states-up-ico-src = "'assets/unchecked.png'"
+		/>
+	</Checkbox>
+	
+	<Toggle>
+        <option
+			format-size = "30"
+			format-color = "0x000000"
+        />
+    </Toggle>
+</Defaults>

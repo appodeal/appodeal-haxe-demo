@@ -40,12 +40,13 @@
 	::if (IOS_APP_ORIENTATION != null)::
 	<key>UISupportedInterfaceOrientations</key>
 	::IOS_APP_ORIENTATION::::end::
-
-<key>NSAppTransportSecurity</key>
-<dict>
-  <key>NSAllowsArbitraryLoads</key>
-  <true/>
-</dict>
-
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Advertising</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Advertising</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Advertising</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Advertising</string>
 </dict>
 </plist>

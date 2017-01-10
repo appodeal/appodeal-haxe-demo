@@ -713,7 +713,7 @@ class Appodeal  {
 	public static function setCustomIntegerRule(name:String, set:Int):Void {
 		#if android
 			if(_setCustomIntegerRule == null) {
-				_setCustomBooleanRule = JNI.createStaticMethod(appodealJava, "setCustomBooleanRule", "(Ljava/lang/String;I)V");
+				_setCustomBooleanRule = JNI.createStaticMethod(appodealJava, "setCustomIntegerRule", "(Ljava/lang/String;I)V");
 			}
 			_setCustomBooleanRule(name, set);
 		#end
@@ -725,7 +725,7 @@ class Appodeal  {
 	public static function setCustomDoubleRule(name:String, set:Float):Void {
 		#if android
 			if(_setCustomDoubleRule == null) {
-				_setCustomDoubleRule = JNI.createStaticMethod(appodealJava, "setCustomBooleanRule", "(Ljava/lang/String;D)V");
+				_setCustomDoubleRule = JNI.createStaticMethod(appodealJava, "setCustomDoubleRule", "(Ljava/lang/String;D)V");
 			}
 			_setCustomDoubleRule(name, set);
 		#end
@@ -737,7 +737,7 @@ class Appodeal  {
 	public static function setCustomStringRule(name:String, set:String):Void {
 		#if android
 			if(_setCustomStringRule == null) {
-				_setCustomStringRule = JNI.createStaticMethod(appodealJava, "setCustomBooleanRule", "(Ljava/lang/String;Ljava/lang/String;)V");
+				_setCustomStringRule = JNI.createStaticMethod(appodealJava, "setCustomStringRule", "(Ljava/lang/String;Ljava/lang/String;)V");
 			}
 			_setCustomStringRule(name, set);
 		#end

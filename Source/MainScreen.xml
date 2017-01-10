@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<Floating id="'root'" widthPt="100" heightPt="100"  on-resize="
+        $this.scaleContent = $Lib.current.stage.stageWidth / 800;
+    " 
+>
+	<HBox childPadding="20" w="800" h="450" top="0" left="0" padding="10">
+		<VBox heightPt="100" widthPt="50" childPadding="5" align="'center,top'">
+			<Options
+				id="'ad_type'"
+				options = "[['Select Ad Type', 0], ['Banner Bottom', 1], ['Banner Top', 2], ['Interstitial', 3], ['Skippable Video', 4], ['Non Skippable Video', 5], ['Rewarded Video', 6]]"
+
+				optionDefaults = "'option'"
+				minWidthByContent="true" minHeightByContent="true" heightPt="0" widthPt="0"
+				box-skin:Paint-color = "0xFFFFFF"
+			/>
+			<Button text="'Initialize'" minHeightByContent="true" heightPt="0" widthPt="100" on-click="$Main.onInitializePressed();"/>
+			<Button text="'Cache'" minHeightByContent="true" heightPt="0" widthPt="100" on-click="$Main.onCachePressed();"/>
+			<Button text="'Is Loaded?'"  minHeightByContent="true" heightPt="0" widthPt="100" on-click="$Main.isLoaded();"/>
+			<Button text="'Is Precache?'"  minHeightByContent="true" heightPt="0" widthPt="100" on-click="$Main.isPrecache();"/>
+			<Button text="'Show'" minHeightByContent="true" heightPt="0" widthPt="100" on-click="$Main.show();"/>
+			<Button text="'Hide'" minHeightByContent="true" heightPt="0" widthPt="100" on-click="$Main.hide();"/>
+		</VBox>
+		<VBox heightPt="100" widthPt="50" childPadding="5" align="'left,top'">
+			<Text text="'Please use following checkboxes before initialization'" format-size = "15" format-color = "0xFFFFFF"/>
+			<Checkbox id="'chk_testing'" text="'Testing'" />
+			<Checkbox id="'chk_logging'" text="'Logging'" />
+			<Checkbox id="'chk_confirm'" text="'Confirm usage'" />
+			<Checkbox id="'chk_autocache'" text="'Disable Autocache'" />
+			<Checkbox id="'chk_ban_big'" text="'Disable 728x90 banners'" />
+			<Checkbox id="'chk_ban_anim'" text="'Disable Banner Animation'" />
+			<Checkbox id="'chk_ban_smart'" text="'Disable Smart Banners'" />
+			<Checkbox id="'chk_ban_bck'" text="'Enable Banner Background'" />
+			<Checkbox id="'chk_on_loaded'" text="'Trigger onLoaded on precache'" />
+		</VBox>
+	</HBox>
+</Floating>

@@ -34,11 +34,17 @@ All required changes to AndroidManifest.xml are already included in the plugin
 
 ### 4.1. SDK files
 
-Download the plugin and unzip it into your project directory. Open project.xml and append the following lines:
+Download the plugin and run the following command in terminal:
+
+```
+haxelib install appodeal_plugin.zip
+``` 
+
+After installation open project.xml of your project and append the following lines:
 
 ```
 <haxelib name="extension-admob" />
-<include path="./appodeal-plugin" /> 
+<haxelib name="./appodeal-plugin" /> 
 ```
 
 To install extension-admob, you can simply get the library from haxelib like this:
@@ -157,8 +163,11 @@ In test mode test ads will be shown and debug data will be written to logcat
 #### Enabling logging
 
 ```
-Appodeal.setLogging(true)
+Appodeal.setLogLevel(Appodeal.LOG_LEVEL_VERBOSE)
 ```
+
+Possible values: Appodeal.LOG_LEVEL_VERBOSE, Appodeal.LOG_LEVEL_DEBUG, Appodeal.LOG_LEVEL_NONE
+
 Enable debug logging to logcat using tag "Appodeal"
 
 #### Checking if ad is loaded

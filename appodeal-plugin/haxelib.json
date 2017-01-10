@@ -1,0 +1,11 @@
+{
+  "name": "appodeal_plugin",
+  "url" : "https://www.appodeal.com/",
+  "license": "MIT",
+  "tags": ["android"],
+  "description": "Appodeal's supply-side platform is designed and built by veteran publishers, for publishers. Appodeal is not an ad network, it is a new approach to monetizing for publishers.",
+  "version": "1.15.8",
+  "releasenote": "Initial release, everything is working correctly.",
+  "contributors": ["Appodeal"],
+  "dependencies": {}
+}

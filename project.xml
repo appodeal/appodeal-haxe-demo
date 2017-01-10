@@ -7,12 +7,13 @@
 	<source path="Source" />
 	
 	<haxelib name="openfl" />
-	<haxelib name="extension-admob" />
+	<haxelib name="stablexui" />
+	<haxelib name="actuate" />
 	
 	<assets path="Assets" rename="assets" />
 	
 	<include path="./appodeal-plugin" />
 	
-	<window background="#EF3326" fps="60" />
-	
+	<window background="#EF3326" fps="60" orientation="landscape" width="800" height="450"/>
+	<window width="0" height="0" fullscreen="true" if="mobile"/>
 </project>

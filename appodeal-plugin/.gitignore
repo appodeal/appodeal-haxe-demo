@@ -1,0 +1,13 @@
+*/.DS_Store
+.DS_Store
+.DS_Store?
+Export/
+ndll/*/steamworks*
+ndll/*/libsteamworks*
+project/all_objs
+project/obj
+project/vc*.pdb
+*.userprefs
+*.swp
+.idea/
+*.iml
